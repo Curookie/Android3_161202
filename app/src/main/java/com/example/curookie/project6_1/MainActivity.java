@@ -1,5 +1,6 @@
 package com.example.curookie.project6_1;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 cro.start();
+                cro.setTextColor(Color.RED);
             }
         });
     }
