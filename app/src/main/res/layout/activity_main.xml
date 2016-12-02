@@ -10,7 +10,7 @@
     <Chronometer
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/chronometer2"
+        android:id="@+id/chronometer"
         android:format="예약에 걸린 시간 %s"
         android:textSize="18sp"
         android:gravity="center"
