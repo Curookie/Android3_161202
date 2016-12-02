@@ -11,6 +11,7 @@ import android.widget.Chronometer;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     int day=-1;
     int hour=-1;
     int min=-1;
+    int flag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +34,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("시간 예약");
 
-        btn1 = (Button)findViewById(R.id.button);
-        cro = (Chronometer)findViewById(R.id.chronometer);
-        cv = (CalendarView)findViewById(R.id.calendarView);
-        tp = (TimePicker)findViewById(R.id.timePicker);
-        rg = (RadioGroup)findViewById(R.id.rg);
-        btnDone = (Button)findViewById(R.id.button2);
-        tv = (TextView)findViewById(R.id.textView);
+        initId();
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(flag==0) flag=1;
+                else if (flag==1) { Toast.makeText(getApplicationContext(),"예약을 완료해 주세요~ :)",Toast.LENGTH_SHORT).show(); return; }
                 cro.setBase(SystemClock.elapsedRealtime());
                 cro.start();
                 cro.setTextColor(Color.RED);
@@ -52,9 +50,12 @@ public class MainActivity extends AppCompatActivity {
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(flag==0) { Toast.makeText(getApplicationContext(),"'예약 시작'버튼을 누르고 예약해주세요!",Toast.LENGTH_SHORT).show(); return; }
+                if(year==-1||min==-1) { Toast.makeText(getApplicationContext(),"날짜와 시간을 입력해주세요!",Toast.LENGTH_SHORT).show(); return; }
                 cro.stop();
                 cro.setTextColor(0xff0099cc);
                 tv.setText(year+"년"+mon+"월"+day+"일 "+hour+"시"+min+"분 예약됨 ");
+                flag=0;
             }
         });
 
@@ -79,5 +80,15 @@ public class MainActivity extends AppCompatActivity {
                 else if(i==R.id.radioButton2) { tp.setVisibility(View.VISIBLE); cv.setVisibility(View.INVISIBLE); }
             }
         });
+    }
+
+    private void initId() {
+        btn1 = (Button)findViewById(R.id.button);
+        cro = (Chronometer)findViewById(R.id.chronometer);
+        cv = (CalendarView)findViewById(R.id.calendarView);
+        tp = (TimePicker)findViewById(R.id.timePicker);
+        rg = (RadioGroup)findViewById(R.id.rg);
+        btnDone = (Button)findViewById(R.id.button2);
+        tv = (TextView)findViewById(R.id.textView);
     }
 }
