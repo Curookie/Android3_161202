@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 cro.stop();
                 cro.setTextColor(0xff0099cc);
-                tv.setText(year+"년"+mon+"월"+day+"일 "+hour+"시"+min+"분 예약됨");
+                tv.setText(year+"년"+mon+"월"+day+"일 "+hour+"시"+min+"분 예약됨 ");
             }
         });
 
